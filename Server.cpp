@@ -20,7 +20,7 @@ void Server::work(ip::tcp::acceptor &acceptor) {
         acceptor.accept(sock);
         mutex.unlock();
         int bytes = read(sock, buffer(buff),
-                         boost::bind(read_complete,buff,_1,_2));
+                         boost::bind(&Server::read_complete,buff,_1,_2));
         std::string msg(buff, bytes);
         sock.write_some(buffer(msg));
         sock.close();
@@ -31,10 +31,10 @@ void Server::handle_connections() {
     ip::tcp::acceptor acceptor(service, ip::tcp::endpoint(ip::tcp::v4(),8001));
     boost::thread_group threads;
 
-    std::thread t1(work,std::ref(acceptor));
-    std::thread t2(work,std::ref(acceptor));
-    std::thread t3(work,std::ref(acceptor));
-    std::thread t4(work,std::ref(acceptor));
+    std::thread t1(&Server::work,std::ref(acceptor));
+    std::thread t2(&Server::work,std::ref(acceptor));
+    std::thread t3(&Server::work,std::ref(acceptor));
+    std::thread t4(&Server::work,std::ref(acceptor));
 
     t1.join();
     t2.join();

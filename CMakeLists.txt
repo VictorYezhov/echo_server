@@ -9,6 +9,6 @@ include_directories( ${Boost_INCLUDE_DIRS} )
 
 
 
-add_executable(server_boost main.cpp)
+add_executable(server_boost main.cpp ClientSession.cpp ClientSession.h Server.cpp Server.h)
 target_link_libraries(server_boost ${Boost_LIBRARIES})
 

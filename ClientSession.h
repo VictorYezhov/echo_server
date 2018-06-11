@@ -29,18 +29,18 @@ using namespace boost::asio;
 using namespace boost::posix_time;
 
 
-
+/**
+ * Це просто клас обгортка для сокета  до якого підключаються клієнти
+ */
 class ClientSession {
 
 public:
 
     ~ClientSession() {
-        //log("Connection closed");
         socket_.close();
-
     }
 
-    ClientSession(boost::asio::io_service &io):io(io), socket_(io){}
+    ClientSession(boost::asio::io_service &io):io(io), socket_(io){}// Кожен сокет ініціалізується io-сервісом
     tcp::socket socket_;
 private:
     boost::asio::io_service &io;

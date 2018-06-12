@@ -29,7 +29,7 @@ void Server::async_accept_new_connection(ip::tcp::acceptor &acceptor, io_service
 
 void Server::run() {
 
-    boost::asio::io_service io; /// Це якась магічна штука яка займається багатьма низькорівневими речами, нам то знати не треба
+    boost::asio::io_service io; /// Це якась магічна штука яка займається багатьма низькорівневими речима
     boost::asio::io_service::work some_work(io); /// The work class is used to inform the io_service when work starts and finishes.
     /// This ensures that the io_service object's run() function will not exit while work is underway,
     /// and that it does exit when there is no unfinished work remaining.
